@@ -20,3 +20,7 @@ label{
   margin-top: -1.4em;  /* make this margin match whatever your line-height is */
   line-height: 1.4em;  /* can be set here, or elsewehere */
 }
+
+.help{
+  color: red;
+}
