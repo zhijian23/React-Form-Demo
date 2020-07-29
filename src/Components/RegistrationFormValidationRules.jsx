@@ -22,8 +22,8 @@ function userNameValidation(values) {
     if (!values.userName) {
         errors.userName = "Username required!";
 
-    } else if (values.fullName.length > 40) {
-        errors.userName = "Full name too long!";
+    } else if (values.userName.length > 40) {
+        errors.userName = "Username too long!";
 
     } else if (/\s/.test(values.userName)) {
         errors.userName = "Username cannot contain white space!";
@@ -56,13 +56,13 @@ function phoneNumValidation(values) {
     if (!values.phoneNum) {
         errors.phoneNum = "Phone number is required";
 
-    } else if (/w/.test(values.phoneNum)) {
-        errors.phoneNum = "Please enter a valid phone number!";
+    } else if (!/^[0-9]+$/.test(values.phoneNum)) {
+        errors.phoneNum = "Phone number cannot contain alphabets!";
 
-    }else if (values.phoneNum.length > 18) {
-        errors.userName = "Invalid Phone Number!";
+    } else if (values.phoneNum.length > 18) {
+        errors.phoneNum = "Invalid Phone Number!";
     }
-    
+
     return errors;
 }
 
@@ -73,9 +73,14 @@ function passwordValidation(values) {
     if (!values.password) {
         errors.password = "Password is required";
 
-    } else if (!/\S+@\S+\.\S+/.test(values.password)) {
-        errors.password = "Password is invalid!";
+    } else if (!/\d/.test(values.password)){
+        errors.password = "Password must contain at least 1 number!"
 
+    } else if (!/[A-Z]/.test(values.password)){
+        errors.password = "Password must contain at least 1 upper case letter!"
+
+    } else if(values.password.length < 8) {
+        errors.password = "Password must contain at least 8 characters!";
     }
 
     return errors;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { emailValidation, userNameValidation, fullNameValidation } from "./RegistrationFormValidationRules";
+import { emailValidation, userNameValidation, fullNameValidation, phoneNumValidation, passwordValidation } from "./RegistrationFormValidationRules";
 import "./form.css"
 
 function Form(callback) {
@@ -9,15 +9,17 @@ function Form(callback) {
         userName: "",
         email: "",
         phoneNum: "",
-        password: ""
+        password: "",
+        confirm: ""
     });
 
     const [errors, setErrors] = useState({
         fullNameError: "",
         userNameError: "",
         emailError: "",
-        phoneNum: "",
-        password: ""
+        phoneNumError: "",
+        passwordError: "",
+        confirmError: ""
     });
     //const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -31,13 +33,31 @@ function Form(callback) {
         event.preventDefault();
 
         setErrors((prevErrors) => {
+
             return {
                 ...prevErrors,
                 fullNameError: fullNameValidation(values), //validate fullname input
-                userNameError: userNameValidation(values),
-                emailError: emailValidation(values) //validate email input
-            }
+                userNameError: userNameValidation(values), //validate username
+                emailError: emailValidation(values), //validate email input
+                phoneNumError: phoneNumValidation(values), //validate phone number
+                passwordError: passwordValidation(values) // validate password
+            };
         });
+
+        if (!values.confirm){
+            setErrors((prevErrors) => {
+                return {...prevErrors, confirmError: "Please confirm your password!"};
+            })
+        } else if (values.password !== values.confirm){
+            setErrors((prevErrors) => {
+                return {...prevErrors, confirmError: "Password does not match!"};
+            })
+        } else {
+            setErrors((prevErrors) => {
+                return {...prevErrors, confirmError: ""};
+            })
+        }
+
     }
 
     function handleChange(event) {
@@ -87,12 +107,20 @@ function Form(callback) {
                 />
 
                 <input
-                name="password"
+                    name="password"
+                    onChange={handleChange}
+                    type="password"
+                    value={values.password}
+                    placeholder="Password"
+                />
+
+                <input
+                name="confirm"
                 onChange={handleChange}
                 type="password"
-                value={values.password}
-                placeholder="Password" />
-                <input type="password" placeholder="Confirm Password" />
+                value={values.confirm}
+                placeholder="Confirm Password"
+                />
                 <button>Submit</button>
             </form>
         </div>
