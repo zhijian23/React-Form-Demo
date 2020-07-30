@@ -1,26 +1,35 @@
 input{
-  border: 1px solid rgba(252, 252, 252, 0.4);
-  background-color: rgba(252, 252, 252, 0.2);
-  width: 250px;
-  border-radius: 3px;
-  font-family: "Source Sans Pro", sans-serif;
-  padding: 10px 15px;
-  margin: 0 auto 10px auto;
-  display: block;
+  width: 50%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-left: 24%;
+  margin-top: 0px;
+  margin-bottom: 25px;
   text-align: center;
-  font-size: 18px;
-  color: black;
-  font-weight: 300;
+}
+
+button {
+  width: 25%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  margin-top: 20px;
+  margin-left: 36%;
+}
+
+.wall {
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-left: 5%;
+  margin-right: 5%
 }
 
 label{
-  margin-left: 2em;
   display: block;
   position: relative;
-  margin-top: -1.4em;  /* make this margin match whatever your line-height is */
-  line-height: 1.4em;  /* can be set here, or elsewehere */
-}
-
-.help{
-  color: red;
+  margin-top: 20px;  
+  margin-left: 24%;
+  font-size: large;
 }

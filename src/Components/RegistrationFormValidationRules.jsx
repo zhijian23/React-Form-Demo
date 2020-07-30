@@ -1,90 +1,72 @@
-function fullNameValidation(values) {
+function Validation(values) {
+    // This function takes in object as an input and return anotherError object as output
 
     let errors = {};
+
+    // Validate full name input
 
     if (!values.fullName) {
-        errors.fullName = "Full name required!";
+        errors.fullNameError = "Full name required!";
 
     } else if (values.fullName.length > 50) {
-        errors.fullName = "Full name too long!";
+        errors.fullNameError = "Full name too long!";
 
     } else if (/\d/.test(values.fullName)) {
-        errors.fullName = "Full name cannot contain numbers!";
+        errors.fullNameError = "Full name cannot contain numbers!";
 
     }
 
-    return errors;
-}
-
-function userNameValidation(values) {
-    let errors = {};
+    // Validate username input
 
     if (!values.userName) {
-        errors.userName = "Username required!";
+        errors.userNameError = "Username required!";
 
     } else if (values.userName.length > 40) {
-        errors.userName = "Username too long!";
+        errors.userNameError = "Username too long!";
 
     } else if (/\s/.test(values.userName)) {
-        errors.userName = "Username cannot contain white space!";
+        errors.userNameError = "Username cannot contain white space!";
 
     }
 
-    return errors;
-}
-
-// this function expect an object as its parameter (values)
-function emailValidation(values) {
-
-    let errors = {}; //create errors object to store any possible error
+    //validate email input
 
     if (!values.email) {
-        errors.email = "Email address is required";
+        errors.emailError = "Email address is required";
 
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-        errors.email = "Email address is invalid!";
+        errors.emailError = "Email address is invalid!";
 
     }
 
-    return errors;
-}
-
-function phoneNumValidation(values) {
-
-    let errors = {}; //create errors object to store any possible error
+    // Validate phone number input
 
     if (!values.phoneNum) {
-        errors.phoneNum = "Phone number is required";
+        errors.phoneNumError = "Phone number is required";
 
     } else if (!/^[0-9]+$/.test(values.phoneNum)) {
-        errors.phoneNum = "Phone number cannot contain alphabets!";
+        errors.phoneNumError = "Phone number cannot contain alphabets!";
 
     } else if (values.phoneNum.length > 18) {
-        errors.phoneNum = "Invalid Phone Number!";
+        errors.phoneNumError = "Invalid Phone Number!";
     }
 
-    return errors;
-}
-
-function passwordValidation(values) {
-
-    let errors = {}; //create errors object to store any possible error
+    // validate password input
 
     if (!values.password) {
-        errors.password = "Password is required";
+        errors.passwordError = "Password is required";
 
     } else if (!/\d/.test(values.password)){
-        errors.password = "Password must contain at least 1 number!"
+        errors.passwordError = "Password must contain at least 1 number!"
 
     } else if (!/[A-Z]/.test(values.password)){
-        errors.password = "Password must contain at least 1 upper case letter!"
+        errors.passwordError = "Password must contain at least 1 upper case letter!"
 
     } else if(values.password.length < 8) {
-        errors.password = "Password must contain at least 8 characters!";
+        errors.passwordError = "Password must contain at least 8 characters!";
     }
 
     return errors;
 }
 
-
-export { emailValidation, userNameValidation, fullNameValidation, phoneNumValidation, passwordValidation };
+export default Validation;
