@@ -1,27 +1,34 @@
 import React from "react";
 import "./data.css";
-const data = require("./iris.json");
+import { useHistory } from "react-router-dom";
+const data = require("./iris.json"); //import iris dataset
 
 
 function Data() {
 
+    // store the first row of data as header
     const header = data[0];
 
+    const history = useHistory();
+
+    // create header for the data table
     function renderHeader(data) {
         return Object.keys(data).map((header) =>
             <th>{header}</th>
         );
     }
-    
+
     return (
         <div>
-
             <h1 style={{ textAlign: "center" }}>Welcome to Iris Dataset!</h1>
             <button
-            className="logout" 
-            onClick={()=>}>Logout</button>
+                className="logout"
+                onClick={() => history.push("/")}>
+                Logout
+            </button>
 
             <hr noshade="2" size="3" style={{ marginBottom: "5%" }} />
+
             <table>
                 <thead>
                     <tr>{renderHeader(header)}</tr>

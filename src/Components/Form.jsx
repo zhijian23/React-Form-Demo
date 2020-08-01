@@ -5,10 +5,6 @@ import "./form.css";
 
 function Form() {
 
-    function submit() {
-        console.log("no errors!")
-    }
-
     const {
         handleChange,
         handleSubmit,
@@ -16,8 +12,9 @@ function Form() {
         handleCheck2,
         errors,
         values
-    } = State(submit, Validation)
-
+    } = State(Validation)
+    
+    // set the mouseOver initial state as false
     const [mouseOver, setMouseOver] = useState(false)
 
     function handleMouseOver() {
@@ -159,14 +156,15 @@ function Form() {
                     type="submit"
                     onMouseOver={handleMouseOver}
                     onMouseOut={handleMouseOut}
-                    onSubmit = {handleSubmit}
-                    style={{ backgroundColor: mouseOver ? "#85f089" : "#4CAF50" }}               
+                    onSubmit={handleSubmit}
+                    style={{ backgroundColor: mouseOver ? "#85f089" : "#4CAF50" }}
                 >
-                   Submit
+                    Submit
                 </button>
             </form>
         </div>
     );
+
 }
 
 export default Form;

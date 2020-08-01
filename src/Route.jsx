@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Data from "./Components/Data";
 import Form from "./Components/Form";
 
+
 function Routes() {
     return (
         <Switch>
