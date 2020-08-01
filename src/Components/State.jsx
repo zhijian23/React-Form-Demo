@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
-function State(callback, validate){
+function State(callback, validate) {
 
     const [values, setValues] = useState({
         fullName: "",
@@ -8,16 +9,20 @@ function State(callback, validate){
         email: "",
         phoneNum: "",
         password: "",
-        confirm: ""
+        confirm: "",
+        checkBox1: false,
+        checkBox2: false
     });
 
     const [errors, setErrors] = useState({
-        fullNameError: "",
+        fullNameError: "", 
         userNameError: "",
         emailError: "",
         phoneNumError: "",
         passwordError: "",
-        confirmError: ""
+        confirmError: "",
+        checkBox1Error: "",
+        checkBox2Error: ""
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,28 +31,20 @@ function State(callback, validate){
         if (Object.keys(errors).length === 0 && isSubmitting) {
             callback()
         }
-    },[errors]);
+    }, [errors]);
+
+    let history = useHistory();
 
     function handleSubmit(event) {
 
         event.preventDefault();
-
         setErrors(validate(values));
 
-        if (!values.confirm) {
-            setErrors((prevErrors) => {
-                return { ...prevErrors, confirmError: "Please confirm your password!" };
-            })
-        } else if (values.password !== values.confirm) {
-            setErrors((prevErrors) => {
-                return { ...prevErrors, confirmError: "Password does not match!" };
-            })
-        } else {
-            setErrors((prevErrors) => {
-                return { ...prevErrors, confirmError: {}};
-            })
-        } 
-        setIsSubmitting(true);       
+        if (Object.keys(errors).length === 0){
+
+            console.log("submit!")
+            return history.push("/data");
+        }
     }
 
     function handleChange(event) {
@@ -60,9 +57,37 @@ function State(callback, validate){
 
     }
 
+    function handleCheck(event) {
+        const { name } = event.target
+        if (!values.checkBox1) {
+            setValues((prevValue) => {
+                return { ...prevValue, [name]: true };
+            })
+        } else {
+            setValues((prevValue => {
+                return { ...prevValue, [name]: false }
+            }))
+        }
+    }
+
+    function handleCheck2(event) {
+        const { name } = event.target
+        if (!values.checkBox2) {
+            setValues((prevValue) => {
+                return { ...prevValue, [name]: true };
+            })
+        } else {
+            setValues((prevValue => {
+                return { ...prevValue, [name]: false }
+            }))
+        }
+    }
+
     return {
         handleChange,
         handleSubmit,
+        handleCheck,
+        handleCheck2,
         errors,
         values
     };

@@ -6,7 +6,7 @@ input{
   box-sizing: border-box;
   margin-left: 24%;
   margin-top: 0px;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
   text-align: center;
 }
 
@@ -32,4 +32,12 @@ label{
   margin-top: 20px;  
   margin-left: 24%;
   font-size: large;
+}
+
+.help.is-danger {
+  color: #f14668;
+  font-size: 15px ;
+  margin-left: 24%;
+  margin-top: 0px;
+  margin-bottom: 25px;
 }

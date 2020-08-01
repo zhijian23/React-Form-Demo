@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import State from "./State";
 import Validation from "./RegistrationFormValidationRules";
-import 'bulma/css/bulma.css';
 import "./form.css";
 
 function Form() {
@@ -13,9 +12,21 @@ function Form() {
     const {
         handleChange,
         handleSubmit,
+        handleCheck,
+        handleCheck2,
         errors,
         values
     } = State(submit, Validation)
+
+    const [mouseOver, setMouseOver] = useState(false)
+
+    function handleMouseOver() {
+        setMouseOver(true);
+    }
+
+    function handleMouseOut() {
+        setMouseOver(false);
+    }
 
     return (
         <div className="wall">
@@ -31,9 +42,9 @@ function Form() {
                     placeholder="Full Name"
                 />
                 <div>
-                {errors.fullNameError
-                    && (<p className="help is-danger">{errors.fullNameError}
-                    </p>)}
+                    {errors.fullNameError
+                        && (<p className="help is-danger">{errors.fullNameError}
+                        </p>)}
                 </div>
 
                 <label className="label" for="userName">Username</label>
@@ -76,9 +87,9 @@ function Form() {
                     placeholder="Phone Number"
                 />
                 <div>
-                {errors.phoneNumError
-                    && (<p className="help is-danger">{errors.phoneNumError}
-                    </p>)}
+                    {errors.phoneNumError
+                        && (<p className="help is-danger">{errors.phoneNumError}
+                        </p>)}
                 </div>
 
                 <label className="label" for="password">Password</label>
@@ -91,9 +102,9 @@ function Form() {
                     placeholder="Password"
                 />
                 <div>
-                {errors.passwordError
-                    && (<p className="help is-danger">{errors.passwordError}
-                    </p>)}
+                    {errors.passwordError
+                        && (<p className="help is-danger">{errors.passwordError}
+                        </p>)}
                 </div>
 
                 <label className="label" for="confirm">Confirm Password</label>
@@ -106,35 +117,53 @@ function Form() {
                     placeholder="Confirm Password"
                 />
                 <div>
-                {errors.confirmError
-                    && (<p className="help is-danger">{errors.confirmError}
-                    </p>)}
+                    {errors.confirmError
+                        && (<p className="help is-danger">{errors.confirmError}
+                        </p>)}
                 </div><br />
 
-                {console.log(errors.userNameError)}
+                <hr size="2" noshade="1" />
 
-                <hr size="2" noshade="1"/>
-
-                <h1 style={{fontSize: "25px"}}><strong>Disclaimer</strong></h1>
+                <h1 style={{ fontSize: "25px" }}><strong>Disclaimer</strong></h1>
 
                 <input
                     id="check"
-                    name="true"
+                    name="checkBox1"
                     type="checkbox"
                     style={{ width: "20px", marginBottom: "5px" }}
-                    value="yes"
+                    onChange={handleCheck}
+                    value={values.checkBox1}
                 />
                 <p2>I confirm that the information given above is true and accurate*</p2><br />
+                <div>
+                    {errors.checkBox1Error
+                        && (<p className="help is-danger">{errors.checkBox1Error}
+                        </p>)}
+                </div><br />
 
                 <input
                     id="check"
-                    name="true"
+                    name="checkBox2"
                     type="checkbox"
                     style={{ width: "20px", marginBottom: "5px" }}
-                    value="yes"
+                    onClick={handleCheck2}
                 />
-                <p2>I have read and understand the <a href="/">Terms & Conditions</a>*</p2><br />
-                <button type="submit">Submit</button>
+                <p2>I have read and understand the <a href="/">Terms & Conditions</a>*</p2>
+                <div>
+                    {errors.checkBox2Error
+                        && (<p className="help is-danger">{errors.checkBox2Error}
+                        </p>)}
+                </div><br />
+
+                <button
+                    type="submit"
+                    onMouseOver={handleMouseOver}
+                    onMouseOut={handleMouseOut}
+                    onSubmit = {handleSubmit}
+                    style={{ backgroundColor: mouseOver ? "#85f089" : "#4CAF50" }}               
+                >
+                   Submit
+                </button>
             </form>
         </div>
     );

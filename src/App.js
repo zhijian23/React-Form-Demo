@@ -1,10 +1,11 @@
 import React from 'react';
-import Form from "./Components/Form";
+import Route from "./Route";
 
 function App() {
+
   return (
     <div className="App">
-      <Form />
+      <Route />   
     </div>
   );
 }

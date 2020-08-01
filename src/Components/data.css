@@ -1,0 +1,21 @@
+table,
+td {
+  border: 1px solid #333;
+  margin-left: 31%;
+  margin-bottom: 5%;
+}
+
+thead,
+tfoot {
+  background-color: #333;
+  color: #fff;
+}
+
+.logout {
+  position: absolute;
+  right: 0;
+  width: 10%;
+  padding: 2px;
+  background-color: #90b891;
+  color: black;
+}
